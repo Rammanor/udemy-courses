@@ -1,0 +1,22 @@
+<html>
+  <body>
+    <h1>My Todos</h1>
+    <ul>
+      <!-- New Todos are insert automatically -->
+    </ul>
+
+    <script>
+      const electron = require('electron');
+      const { ipcRenderer } = electron;
+      const list = document.querySelector('ul');
+
+      ipcRenderer.on('todo:add', (event, new_todo) => {
+        list.insertAdjacentHTML('beforeend', `<li>${new_todo}</li>`)
+      });
+
+      ipcRenderer.on('todo:clear', (event) => {
+        list.innerHTML = '';
+      });
+    </script>
+  </body>
+</html>
